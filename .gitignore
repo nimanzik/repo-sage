@@ -9,4 +9,7 @@
 # Virtual environments
 **/.venv
 
+# direnv file
 **/.envrc
+
+**/_spielwiese
