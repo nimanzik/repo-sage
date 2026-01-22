@@ -3,7 +3,6 @@
 from __future__ import annotations
 
 from typing import TYPE_CHECKING
-from unittest.mock import Mock
 
 import numpy as np
 import pytest
@@ -27,7 +26,7 @@ class TestGetEmbeddingModel:
         mock_transformer = mocker.patch(
             "repo_sage.ingestion.vector_engine.SentenceTransformer"
         )
-        mock_model = Mock()
+        mock_model = mocker.Mock()
         mock_transformer.return_value = mock_model
 
         # Clear cache to ensure fresh call
@@ -45,7 +44,7 @@ class TestGetEmbeddingModel:
         mock_transformer = mocker.patch(
             "repo_sage.ingestion.vector_engine.SentenceTransformer"
         )
-        mock_model = Mock()
+        mock_model = mocker.Mock()
         mock_transformer.return_value = mock_model
 
         get_embedding_model.cache_clear()
@@ -65,8 +64,8 @@ class TestGetEmbeddingModel:
         mock_transformer = mocker.patch(
             "repo_sage.ingestion.vector_engine.SentenceTransformer"
         )
-        mock_model_a = Mock()
-        mock_model_b = Mock()
+        mock_model_a = mocker.Mock()
+        mock_model_b = mocker.Mock()
         mock_transformer.side_effect = [mock_model_a, mock_model_b]
 
         get_embedding_model.cache_clear()
@@ -87,7 +86,7 @@ class TestGetQdrantClient:
         mock_client_class = mocker.patch(
             "repo_sage.ingestion.vector_engine.QdrantClient"
         )
-        mock_client = Mock()
+        mock_client = mocker.Mock()
         mock_client_class.return_value = mock_client
 
         get_qdrant_client.cache_clear()
@@ -102,7 +101,7 @@ class TestGetQdrantClient:
         mock_client_class = mocker.patch(
             "repo_sage.ingestion.vector_engine.QdrantClient"
         )
-        mock_client = Mock()
+        mock_client = mocker.Mock()
         mock_client_class.return_value = mock_client
 
         get_qdrant_client.cache_clear()
@@ -120,8 +119,8 @@ class TestGetQdrantClient:
         mock_client_class = mocker.patch(
             "repo_sage.ingestion.vector_engine.QdrantClient"
         )
-        mock_client_a = Mock()
-        mock_client_b = Mock()
+        mock_client_a = mocker.Mock()
+        mock_client_b = mocker.Mock()
         mock_client_class.side_effect = [mock_client_a, mock_client_b]
 
         get_qdrant_client.cache_clear()
@@ -177,7 +176,7 @@ class TestQdrantEngineClientProperty:
         mock_get_client = mocker.patch(
             "repo_sage.ingestion.vector_engine.get_qdrant_client"
         )
-        mock_client = Mock()
+        mock_client = mocker.Mock()
         mock_get_client.return_value = mock_client
 
         engine = QdrantEngine(collection_name="test", path="/db/path")
@@ -194,7 +193,7 @@ class TestQdrantEngineClientProperty:
         mock_get_client = mocker.patch(
             "repo_sage.ingestion.vector_engine.get_qdrant_client"
         )
-        mock_client = Mock()
+        mock_client = mocker.Mock()
         mock_get_client.return_value = mock_client
 
         engine = QdrantEngine(collection_name="test", path="/db/path")
@@ -214,7 +213,7 @@ class TestQdrantEngineEmbeddingModelProperty:
         mock_get_model = mocker.patch(
             "repo_sage.ingestion.vector_engine.get_embedding_model"
         )
-        mock_model = Mock()
+        mock_model = mocker.Mock()
         mock_get_model.return_value = mock_model
 
         engine = QdrantEngine(
@@ -235,7 +234,7 @@ class TestQdrantEngineEmbeddingModelProperty:
         mock_get_model = mocker.patch(
             "repo_sage.ingestion.vector_engine.get_embedding_model"
         )
-        mock_model = Mock()
+        mock_model = mocker.Mock()
         mock_get_model.return_value = mock_model
 
         engine = QdrantEngine(collection_name="test", path="/db", model_id="my-model")
@@ -259,11 +258,11 @@ class TestQdrantEngineEnsureCollection:
             "repo_sage.ingestion.vector_engine.get_embedding_model"
         )
 
-        mock_client = Mock()
+        mock_client = mocker.Mock()
         mock_client.collection_exists.return_value = False
         mock_get_client.return_value = mock_client
 
-        mock_model = Mock()
+        mock_model = mocker.Mock()
         mock_model.get_sentence_embedding_dimension.return_value = 384
         mock_get_model.return_value = mock_model
 
@@ -283,7 +282,7 @@ class TestQdrantEngineEnsureCollection:
             "repo_sage.ingestion.vector_engine.get_qdrant_client"
         )
 
-        mock_client = Mock()
+        mock_client = mocker.Mock()
         mock_client.collection_exists.return_value = True
         mock_get_client.return_value = mock_client
 
@@ -300,7 +299,7 @@ class TestQdrantEngineEnsureCollection:
             "repo_sage.ingestion.vector_engine.get_qdrant_client"
         )
 
-        mock_client = Mock()
+        mock_client = mocker.Mock()
         mock_get_client.return_value = mock_client
 
         engine = QdrantEngine(collection_name="test", path="/db")
@@ -321,11 +320,11 @@ class TestQdrantEngineEnsureCollection:
             "repo_sage.ingestion.vector_engine.get_embedding_model"
         )
 
-        mock_client = Mock()
+        mock_client = mocker.Mock()
         mock_client.collection_exists.return_value = False
         mock_get_client.return_value = mock_client
 
-        mock_model = Mock()
+        mock_model = mocker.Mock()
         mock_model.get_sentence_embedding_dimension.return_value = None
         mock_get_model.return_value = mock_model
 
@@ -342,7 +341,7 @@ class TestQdrantEngineEnsureCollection:
             "repo_sage.ingestion.vector_engine.get_qdrant_client"
         )
 
-        mock_client = Mock()
+        mock_client = mocker.Mock()
         mock_client.collection_exists.return_value = True
         mock_get_client.return_value = mock_client
 
@@ -365,11 +364,11 @@ class TestQdrantEngineStore:
             "repo_sage.ingestion.vector_engine.get_embedding_model"
         )
 
-        mock_client = Mock()
+        mock_client = mocker.Mock()
         mock_client.collection_exists.return_value = True
         mock_get_client.return_value = mock_client
 
-        mock_model = Mock()
+        mock_model = mocker.Mock()
         mock_embedding = np.array([[0.1, 0.2, 0.3]])
         mock_model.encode.return_value = mock_embedding
         mock_get_model.return_value = mock_model
@@ -392,11 +391,11 @@ class TestQdrantEngineStore:
             "repo_sage.ingestion.vector_engine.get_embedding_model"
         )
 
-        mock_client = Mock()
+        mock_client = mocker.Mock()
         mock_client.collection_exists.return_value = True
         mock_get_client.return_value = mock_client
 
-        mock_model = Mock()
+        mock_model = mocker.Mock()
         mock_embeddings = np.array([[0.1, 0.2], [0.3, 0.4], [0.5, 0.6]])
         mock_model.encode.return_value = mock_embeddings
         mock_get_model.return_value = mock_model
@@ -422,11 +421,11 @@ class TestQdrantEngineStore:
             "repo_sage.ingestion.vector_engine.get_embedding_model"
         )
 
-        mock_client = Mock()
+        mock_client = mocker.Mock()
         mock_client.collection_exists.return_value = True
         mock_get_client.return_value = mock_client
 
-        mock_model = Mock()
+        mock_model = mocker.Mock()
         mock_embeddings = np.array([[0.1, 0.2]])
         mock_model.encode.return_value = mock_embeddings
         mock_get_model.return_value = mock_model
@@ -448,11 +447,11 @@ class TestQdrantEngineStore:
             "repo_sage.ingestion.vector_engine.get_embedding_model"
         )
 
-        mock_client = Mock()
+        mock_client = mocker.Mock()
         mock_client.collection_exists.return_value = False
         mock_get_client.return_value = mock_client
 
-        mock_model = Mock()
+        mock_model = mocker.Mock()
         mock_model.get_sentence_embedding_dimension.return_value = 384
         mock_model.encode.return_value = np.array([[0.1, 0.2]])
         mock_get_model.return_value = mock_model
@@ -476,19 +475,19 @@ class TestQdrantEngineSearch:
             "repo_sage.ingestion.vector_engine.get_embedding_model"
         )
 
-        mock_result_1 = Mock()
+        mock_result_1 = mocker.Mock()
         mock_result_1.payload = {"text": "result one"}
-        mock_result_2 = Mock()
+        mock_result_2 = mocker.Mock()
         mock_result_2.payload = {"text": "result two"}
 
-        mock_query_response = Mock()
+        mock_query_response = mocker.Mock()
         mock_query_response.points = [mock_result_1, mock_result_2]
 
-        mock_client = Mock()
+        mock_client = mocker.Mock()
         mock_client.query_points.return_value = mock_query_response
         mock_get_client.return_value = mock_client
 
-        mock_model = Mock()
+        mock_model = mocker.Mock()
         mock_model.encode.return_value = np.array([0.1, 0.2, 0.3])
         mock_get_model.return_value = mock_model
 
@@ -507,14 +506,14 @@ class TestQdrantEngineSearch:
             "repo_sage.ingestion.vector_engine.get_embedding_model"
         )
 
-        mock_query_response = Mock()
+        mock_query_response = mocker.Mock()
         mock_query_response.points = []
 
-        mock_client = Mock()
+        mock_client = mocker.Mock()
         mock_client.query_points.return_value = mock_query_response
         mock_get_client.return_value = mock_client
 
-        mock_model = Mock()
+        mock_model = mocker.Mock()
         mock_model.encode.return_value = np.array([0.1, 0.2])
         mock_get_model.return_value = mock_model
 
@@ -536,14 +535,14 @@ class TestQdrantEngineSearch:
             "repo_sage.ingestion.vector_engine.get_embedding_model"
         )
 
-        mock_query_response = Mock()
+        mock_query_response = mocker.Mock()
         mock_query_response.points = []
 
-        mock_client = Mock()
+        mock_client = mocker.Mock()
         mock_client.query_points.return_value = mock_query_response
         mock_get_client.return_value = mock_client
 
-        mock_model = Mock()
+        mock_model = mocker.Mock()
         mock_model.encode.return_value = np.array([0.1])
         mock_get_model.return_value = mock_model
 
@@ -563,19 +562,19 @@ class TestQdrantEngineSearch:
             "repo_sage.ingestion.vector_engine.get_embedding_model"
         )
 
-        mock_result_1 = Mock()
+        mock_result_1 = mocker.Mock()
         mock_result_1.payload = {"text": "valid result"}
-        mock_result_2 = Mock()
+        mock_result_2 = mocker.Mock()
         mock_result_2.payload = None
 
-        mock_query_response = Mock()
+        mock_query_response = mocker.Mock()
         mock_query_response.points = [mock_result_1, mock_result_2]
 
-        mock_client = Mock()
+        mock_client = mocker.Mock()
         mock_client.query_points.return_value = mock_query_response
         mock_get_client.return_value = mock_client
 
-        mock_model = Mock()
+        mock_model = mocker.Mock()
         mock_model.encode.return_value = np.array([0.1])
         mock_get_model.return_value = mock_model
 
@@ -594,19 +593,19 @@ class TestQdrantEngineSearch:
             "repo_sage.ingestion.vector_engine.get_embedding_model"
         )
 
-        mock_result_1 = Mock()
+        mock_result_1 = mocker.Mock()
         mock_result_1.payload = {"text": "valid result"}
-        mock_result_2 = Mock()
+        mock_result_2 = mocker.Mock()
         mock_result_2.payload = {"other_key": "no text here"}
 
-        mock_query_response = Mock()
+        mock_query_response = mocker.Mock()
         mock_query_response.points = [mock_result_1, mock_result_2]
 
-        mock_client = Mock()
+        mock_client = mocker.Mock()
         mock_client.query_points.return_value = mock_query_response
         mock_get_client.return_value = mock_client
 
-        mock_model = Mock()
+        mock_model = mocker.Mock()
         mock_model.encode.return_value = np.array([0.1])
         mock_get_model.return_value = mock_model
 
@@ -625,14 +624,14 @@ class TestQdrantEngineSearch:
             "repo_sage.ingestion.vector_engine.get_embedding_model"
         )
 
-        mock_query_response = Mock()
+        mock_query_response = mocker.Mock()
         mock_query_response.points = []
 
-        mock_client = Mock()
+        mock_client = mocker.Mock()
         mock_client.query_points.return_value = mock_query_response
         mock_get_client.return_value = mock_client
 
-        mock_model = Mock()
+        mock_model = mocker.Mock()
         mock_embedding = np.array([0.1, 0.2, 0.3])
         mock_model.encode.return_value = mock_embedding
         mock_get_model.return_value = mock_model
@@ -654,14 +653,14 @@ class TestQdrantEngineSearch:
             "repo_sage.ingestion.vector_engine.get_embedding_model"
         )
 
-        mock_query_response = Mock()
+        mock_query_response = mocker.Mock()
         mock_query_response.points = []
 
-        mock_client = Mock()
+        mock_client = mocker.Mock()
         mock_client.query_points.return_value = mock_query_response
         mock_get_client.return_value = mock_client
 
-        mock_model = Mock()
+        mock_model = mocker.Mock()
         mock_model.encode.return_value = np.array([0.1])
         mock_get_model.return_value = mock_model
 
