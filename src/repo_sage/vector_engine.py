@@ -5,8 +5,8 @@ from qdrant_client import QdrantClient
 from qdrant_client.models import Distance, PointStruct, VectorParams
 from sentence_transformers import SentenceTransformer
 
-from ..defaults import DEFAULT_EMBEDDING_MODEL_ID
-from ..utils.logging import get_logger
+from .defaults import DEFAULT_EMBEDDING_MODEL_ID
+from .utils.logging import get_logger
 
 logger = get_logger(__name__, level="info")
 
