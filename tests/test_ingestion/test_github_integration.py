@@ -13,7 +13,7 @@ To skip them:
 
 import pytest
 
-from repo_sage.ingestion.github import read_repo_markdown_files
+from git_grok.ingestion.github import read_repo_markdown_files
 
 pytestmark = pytest.mark.integration
 

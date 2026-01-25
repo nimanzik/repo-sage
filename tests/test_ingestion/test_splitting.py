@@ -5,7 +5,7 @@ from __future__ import annotations
 from typing import TYPE_CHECKING
 from unittest.mock import Mock
 
-from repo_sage.ingestion.splitting import llm_split
+from git_grok.ingestion.splitting import llm_split
 
 if TYPE_CHECKING:
     from unittest.mock import MagicMock

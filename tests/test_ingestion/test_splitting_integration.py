@@ -16,7 +16,7 @@ import os
 
 import pytest
 
-from repo_sage.ingestion.splitting import llm_split
+from git_grok.ingestion.splitting import llm_split
 
 pytestmark = pytest.mark.integration
 

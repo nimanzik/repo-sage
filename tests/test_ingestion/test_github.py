@@ -9,7 +9,7 @@ import pytest
 from conftest import create_fake_zip_bytes
 from requests import HTTPError
 
-from repo_sage.ingestion.github import read_repo_markdown_files
+from git_grok.ingestion.github import read_repo_markdown_files
 
 if TYPE_CHECKING:
     from unittest.mock import MagicMock

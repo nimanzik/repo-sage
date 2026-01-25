@@ -1,4 +1,4 @@
-"""Shared pytest fixtures for repo_sage tests."""
+"""Shared pytest fixtures for git_grok tests."""
 
 from __future__ import annotations
 
@@ -36,10 +36,10 @@ def create_fake_zip_bytes(files: dict[str, str]) -> bytes:
 @pytest.fixture
 def mock_requests_get(mocker: MockerFixture) -> MockerFixture:
     """Mock requests.get for GitHub ZIP downloads."""
-    return mocker.patch("repo_sage.ingestion.github.requests.get")
+    return mocker.patch("git_grok.ingestion.github.requests.get")
 
 
 @pytest.fixture
 def mock_genai_client(mocker: MockerFixture) -> MockerFixture:
     """Mock the genai client for LLM calls."""
-    return mocker.patch("repo_sage.ingestion.splitting._get_genai_client")
+    return mocker.patch("git_grok.ingestion.splitting._get_genai_client")
